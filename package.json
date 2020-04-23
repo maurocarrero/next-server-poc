@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server",
-    "prebuild": "eslint",
+    "prebuild": "npm run eslint && npm run prettier",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server",
     "eslint": "eslint . --fix",
-    "prettier": "prettier --write {pages,server}/**/*.js"
+    "prettier": "prettier --write {pages,server,components,styles}/**/*.js"
   },
   "author": "Mauro Carrero",
   "license": "ISC",

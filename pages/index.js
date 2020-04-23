@@ -3,9 +3,11 @@ const { array } = require('prop-types');
 
 function HomePage({ movies }) {
   return (
-    <section>
-      <h1>Movies</h1>
-      <section>
+    <section className="container">
+      <header>
+        <h1>Movies</h1>
+      </header>
+      <section className="row">
         {movies.length &&
           movies.map(({ plot, title }, idx) => (
             <article key={idx}>
