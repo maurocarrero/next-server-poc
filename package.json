@@ -1,0 +1,52 @@
+{
+  "name": "next-server",
+  "version": "1.0.0",
+  "description": "Template: Nextjs application with custom server.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server",
+    "prebuild": "eslint",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server",
+    "eslint": "eslint . --fix",
+    "prettier": "prettier --write {pages,server}/**/*.js"
+  },
+  "author": "Mauro Carrero",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.6",
+    "next": "^9.3.5",
+    "next-runtime-dotenv": "^1.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{pages,server}/**/*.{js,json}": [
+      "eslint . --fix",
+      "prettier --write .",
+      "git add"
+    ]
+  }
+}
