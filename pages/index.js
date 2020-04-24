@@ -23,7 +23,7 @@ function HomePage({ movies }) {
 HomePage.getInitialProps = async () => {
   let movies = [];
   try {
-    const { data } = await axios.get('http://localhost:3000/movies');
+    const { data } = await axios.get('http://localhost:3000/api/movies');
     movies = data;
   } catch (err) {
     console.error(err.message);
