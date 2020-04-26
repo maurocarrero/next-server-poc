@@ -1,12 +1,14 @@
 const getConfig = require('next/config').default;
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 
 class DBAdapter {
   constructor() {
     this.date = new Date();
     this.__db = null;
     this.connect = this.connect.bind(this);
-    this.findDocuments = this.findDocuments.bind(this);
+    this.findAll = this.findAll.bind(this);
+    this.findOne = this.findOne.bind(this);
     this.getDb = this.getDb.bind(this);
   }
 
@@ -50,36 +52,51 @@ class DBAdapter {
     return this.__db;
   }
 
-  findDocuments(cb) {
+  findAll(cb) {
     if (!this.__db) {
       console.error('NO DATABASE SET');
 
       return null;
     }
-    console.log('findDocuments :: this.__db', this.__db);
     const { serverRuntimeConfig: { DB_COLLECTION_NAME } = {} } =
       getConfig() || {};
     const collection = this.__db && this.__db.collection(DB_COLLECTION_NAME);
     collection
       ? collection
           .find({})
-          .project({ _id: 0, title: 1, plot: 1 })
+          .project({ title: 1, plot: 1 })
           .toArray(function (err, docs) {
             if (err) throw err;
             cb(docs);
           })
       : {};
   }
+
+  findAllIds(cb) {
+    return this.findAll((docs) => {
+      cb(
+        docs.map((el) => {
+          return el._id;
+        })
+      );
+    });
+  }
+
+  findOne(_id, cb) {
+    if (!this.__db) {
+      console.error('NO DATABASE SET');
+      return null;
+    }
+    const { serverRuntimeConfig: { DB_COLLECTION_NAME } = {} } =
+      getConfig() || {};
+    const collection = this.__db && this.__db.collection(DB_COLLECTION_NAME);
+    collection
+      ? collection.findOne({ _id: ObjectId(_id) }, (err, doc) => {
+          if (err) throw err;
+          cb(doc);
+        })
+      : {};
+  }
 }
 
-let db = null;
-
-const getDbAdapter = () => {
-  if (!db) {
-    console.log('NO EXISTE, lo creo');
-    db = new DBAdapter();
-  }
-  return db;
-};
-
-module.exports = getDbAdapter;
+module.exports = new DBAdapter();
