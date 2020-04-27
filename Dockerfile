@@ -1,35 +1,37 @@
+ARG flavor=12.16.2-alpine3.9
+
 # Install DEV dependencies:
-FROM node:12.16.2-alpine3.9 AS devDeps
+FROM node:$flavor AS devDeps
 WORKDIR /service
 COPY package*.json /service/
 RUN chmod +rwx /service
 RUN npm config set loglevel notice && npm install --verbose
 
 # TEST stage:
-FROM node:12.16.2-alpine3.9 AS unitTests
+FROM node:$flavor AS unitTests
 WORKDIR /service
 COPY --from=devDeps /service/node_modules /service/node_modules
 COPY package.json .babelrc next.config.js /service/
+COPY ./styles /service/styles
 COPY ./components /service/components
 COPY ./pages /service/pages
-COPY ./styles /service/styles
 CMD ["npm", "test"]
 
 # BUILD stage:
-FROM node:12.16.2-alpine3.9 AS builder
+FROM node:$flavor AS builder
 WORKDIR /service
 ARG stage=build-in-container
 COPY --from=devDeps /service/node_modules /service/node_modules
 COPY package.json next.config.js .env.example .eslintrc.yml .prettierrc.js /service/
 COPY .env.example /service/.env
+COPY ./styles /service/styles
 COPY ./components /service/components
 COPY ./pages /service/pages
-COPY ./styles /service/styles
 RUN npm run build
 
 # RUN stage (default target):
 # Install PROD dependencies.
-FROM node:12.16.2-alpine3.9
+FROM node:$flavor
 WORKDIR /service
 COPY --from=builder /service/.next /service/.next
 COPY package*.json .env.example next.config.js /service/
