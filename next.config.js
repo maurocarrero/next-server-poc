@@ -38,7 +38,7 @@ module.exports = (phase) => {
     env: {
       phase,
       stage: process.env.stage,
-      appName: process.env.package_name
+      appName: process.env.npm_package_name
     },
     serverRuntimeConfig: dotEnvResult.required,
     publicRuntimeConfig: {
