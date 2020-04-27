@@ -6,7 +6,7 @@ import useSWR from 'swr';
 const __fetchMovies = async () => {
   let movies = [];
   try {
-    console.log('fetching all movies...');
+    console.log('Fetching all movies...');
     const { data } = await axios.get('http://localhost:3000/api/movies');
     movies = data;
   } catch (err) {
@@ -63,7 +63,7 @@ function HomePage({ movies }) {
 }
 
 HomePage.getInitialProps = async (ctx) => {
-  console.log('getting all movies');
+  console.log('HomePage.getInitialProps');
   let movies = null;
   if (ctx.req) {
     movies = await __fetchMovies();

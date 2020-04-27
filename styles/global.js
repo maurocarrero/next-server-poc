@@ -6,18 +6,30 @@ export default css.global`
     padding: 0;
     font-size: 20px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 1.7;
     color: #434343;
-    font-family: sans-serif;
+    font-family: 'Anonymous Pro for Powerline', sans-serif;
   }
   h1 {
     font-weight: 900;
+    font-family: 'Bungee Inline', sans-serif;
   }
   section.container {
     padding: 0 5rem;
   }
   section.container header h1 {
     padding: 0 5rem;
+    color: #455667;
+    font-weight: 900;
+  }
+  .app-header {
+    background-color: #dedede;
+    font-family: 'IBM 3270', sans-serif;
+    font-size: 0.6rem;
+    padding: 0.3rem;
+  }
+  .app-header span {
+    padding: 0 2rem 0 1rem;
   }
   section.row {
     display: flex;
@@ -29,7 +41,7 @@ export default css.global`
   article {
     border: 0.01rem solid #454545;
     padding: 0 0.5rem;
-    font-size: 0.4rem;
+    font-size: 0.6rem;
     margin: 0.3rem;
     width: 10rem;
     cursor: pointer;

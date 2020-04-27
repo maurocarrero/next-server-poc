@@ -1,4 +1,8 @@
+import getConfig from 'next/config';
+
 export default (req, res) => {
+  console.log('API :: getConfig', getConfig());
+
   // TODO: Why we need this promise??
   // https://github.com/zeit/next.js/issues/10439
   return new Promise((resolve, reject) => {
