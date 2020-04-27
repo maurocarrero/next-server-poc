@@ -8,6 +8,8 @@ extends:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+  it: readonly
+  expect: readonly
 parserOptions:
   ecmaFeatures:
     jsx: true
