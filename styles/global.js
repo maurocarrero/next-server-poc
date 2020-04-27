@@ -27,9 +27,10 @@ export default css.global`
     font-family: 'IBM 3270', sans-serif;
     font-size: 0.6rem;
     padding: 0.3rem;
+    display: flex;
   }
-  .app-header span {
-    padding: 0 2rem 0 1rem;
+  .app-header section {
+    padding: 0 1rem;
   }
   section.row {
     display: flex;
