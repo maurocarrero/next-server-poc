@@ -10,10 +10,9 @@ class MyApp extends App {
         <header className="app-header">
           <ul>
             <li>
-              <Link href="/">{`Movies`}</Link>
-            </li>
-            <li>
-              <Link href="/constants">{`next/constants`}</Link>
+              <Link href="/">
+                <a>{`Movies`}</a>
+              </Link>
             </li>
           </ul>
         </header>

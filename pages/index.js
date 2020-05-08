@@ -63,7 +63,6 @@ function HomePage({ movies }) {
 }
 
 HomePage.getInitialProps = async (ctx) => {
-  console.log('HomePage.getInitialProps');
   let movies = null;
   if (ctx.req) {
     movies = await __fetchMovies();
