@@ -14,6 +14,9 @@ export default css.global`
     font-weight: 900;
     font-family: 'Bungee Inline', sans-serif;
   }
+  pre {
+    font-size: .7rem;
+  }
   section.container {
     padding: 0 5rem;
   }
