@@ -1,26 +1,29 @@
-const express = require('express');
 const next = require('next');
-const dbAdapter = require('./db');
+const getConfig = require('next/config').default;
 
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const bootServer = require('./express-server');
+const dataSource = require('./data-source');
 
-app.prepare().then(() => {
-  const server = express();
+const { serverRuntimeConfig: { NODE_ENV, PORT } = {} } = getConfig() || {};
+const dev = NODE_ENV !== 'production';
 
-  server.all('*', (req, res) => {
-    res.locals.db = dbAdapter;
-    return handle(req, res);
-  });
+const nextJSApp = next({ dev });
+const handle = nextJSApp.getRequestHandler();
 
-  dbAdapter.connect(() => {
-    server.listen(port, (err) => {
-      if (err) {
-        console.log('ERR', err.message);
-      }
-      console.log(`> Ready on http://localhost:${port}`);
+(async () => {
+  try {
+    await nextJSApp.prepare();
+    await dataSource.connect();
+
+    const expressServer = await bootServer();
+
+    expressServer.all('*', (req, res) => handle(req, res));
+
+    expressServer.listen(PORT || 3000, () => {
+      console.log(`Server listening on http://localhost:${PORT || 3000}`);
     });
-  });
-});
+  } catch (err) {
+    console.error(err.stack);
+    process.exit(1);
+  }
+})();

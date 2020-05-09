@@ -24,7 +24,7 @@ function DetailPage({ movie }) {
     }
   );
 
-  const { actors = [], director, plot, title = 'Loading...' } =
+  const { cast = [], directors, plot, title = 'Loading...', poster } =
     movieDetails || {};
 
   useEffect(() => {
@@ -47,28 +47,45 @@ function DetailPage({ movie }) {
         </p>
       )}
       <section className="row">
-        {isLoading ? (
-          <div className="loader blasting-ripple" />
-        ) : (
-          <dl>
-            <dt>{`Plot`}</dt>
-            <dd>{plot}</dd>
-            <dt>{`Director`}</dt>
-            <dd>{director}</dd>
-            {actors.length && (
-              <>
-                <dt>{`Actors`}</dt>
-                <dd>
-                  {actors.reduce(
-                    (sentence, a) =>
-                      sentence.concat(!sentence.length ? a : `, ${a}`),
-                    ''
-                  )}
-                </dd>
-              </>
-            )}
-          </dl>
-        )}
+        <div className="col">
+          <img src={poster} />
+        </div>
+        <div className="col">
+          {isLoading ? (
+            <div className="loader blasting-ripple" />
+          ) : (
+            <dl>
+              <dt>{`Plot`}</dt>
+              <dd>{plot}</dd>
+
+              {directors.length && (
+                <>
+                  <dt>{`Directors`}</dt>
+                  <dd>
+                    {directors.reduce(
+                      (sentence, a) =>
+                        sentence.concat(!sentence.length ? a : `, ${a}`),
+                      ''
+                    )}
+                  </dd>
+                </>
+              )}
+
+              {cast.length && (
+                <>
+                  <dt>{`Cast`}</dt>
+                  <dd>
+                    {cast.reduce(
+                      (sentence, a) =>
+                        sentence.concat(!sentence.length ? a : `, ${a}`),
+                      ''
+                    )}
+                  </dd>
+                </>
+              )}
+            </dl>
+          )}
+        </div>
       </section>
       <footer>
         <Link href="/">

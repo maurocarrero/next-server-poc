@@ -15,7 +15,7 @@ export default css.global`
     font-family: 'Bungee Inline', sans-serif;
   }
   pre {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
   section.container {
     padding: 0 5rem;
@@ -26,11 +26,17 @@ export default css.global`
     font-weight: 900;
   }
   .app-header {
-    background-color: #dedede;
+    background-color: #455667;
     font-family: 'IBM 3270', sans-serif;
-    font-size: 0.6rem;
-    padding: 0.3rem;
+    font-size: 1.2rem;
+    padding: 0;
     display: flex;
+  }
+  .app-header li {
+    list-style-type: none;
+  }
+  .app-header li a {
+    color: #efefef;
   }
   .app-header section {
     padding: 0 1rem;
@@ -41,6 +47,13 @@ export default css.global`
     flex-wrap: wrap;
     justify-content: center;
     flex-wrap: wrap;
+  }
+  section.row .col {
+    padding: 2rem;
+  }
+  section.row .col img {
+    max-height: 30rem;
+    max-width: 15rem;
   }
   article {
     border: 0.01rem solid #454545;

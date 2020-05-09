@@ -1,4 +1,4 @@
-const nextConstants = require('next/constants');
+const { PHASE_PRODUCTION_SERVER } = require('next/constants');
 
 const dotEnvResult = require('dotenv-safe').config({
   allowEmptyValues: true
@@ -12,7 +12,7 @@ module.exports = (phase) => ({
   serverRuntimeConfig: dotEnvResult.required,
   publicRuntimeConfig: {
     phase,
-    nextConstants,
+    NODE_ENV: phase === PHASE_PRODUCTION_SERVER ? 'production' : 'development',
     staticFolder: '/static',
     appName: process.env.npm_package_name
   }
