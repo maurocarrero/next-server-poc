@@ -2,7 +2,7 @@ const getConfig = require('next/config').default;
 const express = require('express');
 const morgan = require('morgan');
 
-const movies = require('./movies.router');
+const moviesRouter = require('./movies.router');
 
 const bootServer = async () => {
   try {
@@ -13,7 +13,7 @@ const bootServer = async () => {
       server.use(morgan('dev'));
     }
 
-    server.use('/api/movies', movies);
+    server.use('/api/movies', moviesRouter);
 
     return server;
   } catch (err) {

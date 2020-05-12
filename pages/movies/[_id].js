@@ -6,7 +6,6 @@ import useSWR from 'swr';
 import { useEffect } from 'react';
 
 const __getMovieFetcher = (_id) => async () => {
-  console.log('Fetching movie...');
   const { data } = await axios.get(`http://localhost:3000/api/movies/${_id}`);
   return data;
 };
@@ -97,7 +96,6 @@ function DetailPage({ movie }) {
 }
 
 DetailPage.getInitialProps = async (ctx) => {
-  console.log('DetailPage.getInitialProps');
   let movie = null;
   if (ctx.req) {
     const {

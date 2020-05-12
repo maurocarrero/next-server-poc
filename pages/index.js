@@ -6,9 +6,7 @@ import useSWR from 'swr';
 const __fetchMovies = async () => {
   let movies = [];
   try {
-    console.time('Fetching');
     const { data } = await axios.get('http://localhost:3000/api/movies');
-    console.timeEnd('Fetching', data);
     movies = data;
   } catch (err) {
     console.error(err.message);
