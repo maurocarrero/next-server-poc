@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { array } from 'prop-types';
@@ -26,7 +27,7 @@ function HomePage({ movies }) {
     }
   );
 
-  const navigateToDetail = (_id) => () => {
+  const navigateToDetail = (_id: string) => () => {
     const route = `/movies/[_id]`;
     const as = `/movies/${_id}`;
     router.push(route, as);
